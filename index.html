@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Operador de Empilhadeira</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f4f4f4;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 42px 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 14px;
+            font-size: 34px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .subtitle {
+            margin: 0 auto 30px;
+            max-width: 760px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .video-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-box {
+            position: relative;
+            width: min(100%, 576px);
+            aspect-ratio: 576 / 1024;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #000;
+        }
+
+        .start-screen {
+            position: absolute;
+            inset: 0;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            z-index: 5;
+        }
+
+        .start-text {
+            color: #fff;
+            font-size: 17px;
+            padding: 0 25px;
+            line-height: 1.5;
+        }
+
+        .start-button {
+            border: none;
+            padding: 15px 34px;
+            border-radius: 50px;
+            background: #ffffff;
+            color: #111;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .start-button:hover {
+            transform: scale(1.04);
+        }
+
+        .finished {
+            width: 100%;
+            min-height: 500px;
+            background: linear-gradient(145deg, #111, #292929);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 25px;
+            color: #fff;
+        }
+
+        .finished-title {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .finished-text {
+            font-size: 17px;
+            line-height: 1.5;
+            margin-bottom: 28px;
+            color: #ddd;
+        }
+
+        #cadastroBtn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 48px;
+            border-radius: 50px;
+            background: #ffffff;
+            color: #111111;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transition: all 0.25s ease;
+        }
+
+        #cadastroBtn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .instruction {
+            margin-top: 25px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .footer {
+            margin-top: 35px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 28px 15px;
+                border-radius: 18px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .video-box {
+                border-radius: 16px;
+            }
+
+            .finished {
+                min-height: 500px;
+                border-radius: 16px;
+            }
+
+            .finished-title {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Operador de Empilhadeira</h1>
+
+    <p class="subtitle">
+        Assista ao vídeo completo antes de realizar seu cadastro.
+        Ao final, o botão de cadastro será liberado.
+    </p>
+
+    <div class="video-area">
+
+        <div class="video-box" id="videoBox">
+
+            <video
+                id="video"
+                playsinline
+                preload="auto"
+                controlslist="nodownload nofullscreen noremoteplayback"
+                disablepictureinpicture
+                oncontextmenu="return false;"
+            >
+                <source
+                    src="https://res.cloudinary.com/uqats0ee/video/upload/v1791999129/OPERADOR_DE_EMPILHADEIRA.mp4"
+                    type="video/mp4"
+                >
+                Seu navegador não suporta a reprodução deste vídeo.
+            </video>
+
+            <div class="start-screen" id="startScreen">
+
+                <div class="start-text">
+                    Assista ao vídeo completo para continuar.
+                </div>
+
+                <button
+                    class="start-button"
+                    id="startButton"
+                    type="button"
+                >
+                    ▶ Iniciar vídeo
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <p class="instruction" id="instruction">
+        O botão de cadastro será liberado somente após o término do vídeo.
+    </p>
+
+    <div class="footer">
+        GM Promo • Recrutamento e Seleção
+    </div>
+
+</div>
+
+
+<script>
+
+    const video = document.getElementById("video");
+    const videoBox = document.getElementById("videoBox");
+    const startScreen = document.getElementById("startScreen");
+    const startButton = document.getElementById("startButton");
+    const instruction = document.getElementById("instruction");
+
+    let videoStarted = false;
+    let lastTime = 0;
+
+
+    /*
+     * INICIA O VÍDEO
+     */
+
+    startButton.addEventListener("click", function () {
+
+        videoStarted = true;
+
+        startScreen.style.display = "none";
+
+        video.currentTime = 0;
+
+        video.play().catch(function () {
+            startScreen.style.display = "flex";
+        });
+
+    });
+
+
+    /*
+     * IMPEDE QUE A PESSOA USE O TECLADO
+     * PARA TENTAR AVANÇAR OU VOLTAR.
+     */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (!videoStarted) {
+            return;
+        }
+
+        const teclasBloqueadas = [
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "ArrowDown",
+            " ",
+            "Home",
+            "End"
+        ];
+
+        if (teclasBloqueadas.includes(event.key)) {
+            event.preventDefault();
+        }
+
+    });
+
+
+    /*
+     * IMPEDE ALTERAÇÃO MANUAL DO TEMPO.
+     */
+
+    video.addEventListener("timeupdate", function () {
+
+        if (!videoStarted) {
+            return;
+        }
+
+        if (video.currentTime < lastTime - 0.5) {
+
+            video.currentTime = lastTime;
+
+        } else {
+
+            lastTime = video.currentTime;
+
+        }
+
+    });
+
+
+    /*
+     * SE TENTAR MOVER O TEMPO DO VÍDEO,
+     * VOLTA PARA A POSIÇÃO ANTERIOR.
+     */
+
+    video.addEventListener("seeking", function () {
+
+        if (!videoStarted) {
+            return;
+        }
+
+        if (video.currentTime > lastTime + 0.5) {
+
+            video.currentTime = lastTime;
+
+        }
+
+        if (video.currentTime < lastTime - 0.5) {
+
+            video.currentTime = lastTime;
+
+        }
+
+    });
+
+
+    /*
+     * NÃO PERMITE PAUSAR O VÍDEO DEPOIS QUE ELE COMEÇOU.
+     */
+
+    video.addEventListener("pause", function () {
+
+        if (
+            videoStarted &&
+            !video.ended
+        ) {
+
+            video.play().catch(function () {});
+
+        }
+
+    });
+
+
+    /*
+     * QUANDO O VÍDEO TERMINAR:
+     *
+     * O VÍDEO É REMOVIDO
+     * E O BOTÃO DE CADASTRO APARECE
+     * NO MESMO LUGAR.
+     */
+
+    video.addEventListener("ended", function () {
+
+        videoStarted = false;
+
+        videoBox.innerHTML = `
+
+            <div class="finished">
+
+                <div class="finished-title">
+                    Vídeo concluído!
+                </div>
+
+                <div class="finished-text">
+                    Agora você pode realizar seu cadastro.
+                </div>
+
+                <a
+                    id="cadastroBtn"
+                    href="https://forms.gle/bLxFTxx2RgNWsUwBA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Cadastre-se
+                </a>
+
+            </div>
+
+        `;
+
+        instruction.textContent =
+            "Clique no botão acima para realizar seu cadastro.";
+
+    });
+
+
+    /*
+     * DESABILITA MENU DO BOTÃO DIREITO
+     */
+
+    video.addEventListener("contextmenu", function (event) {
+
+        event.preventDefault();
+
+    });
+
+
+</script>
+
+</body>
+</html>
